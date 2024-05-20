@@ -1,0 +1,38 @@
+{
+    "Delta": [
+        {
+            "flight_num": "DL1234",
+            "capacity": 54,
+            "estimated_flight_duration": 180
+        },
+        {
+            "flight_num": "DL5678",
+            "capacity": 30,
+            "estimated_flight_duration": 79
+        }
+    ],
+    "Southwest": [
+        {
+            "flight_num": "SWA3298",
+            "capacity": 45,
+            "estimated_flight_duration": 122
+        },
+        {
+            "flight_num": "SWA8002",
+            "capacity": 73,
+            "estimated_flight_duration": 150
+        }
+    ],
+    "Alaska": [
+        {
+            "flight_num": "AS900",
+            "capacity": 60,
+            "estimated_flight_duration": 140
+        },
+        {
+            "flight_num": "AS7230",
+            "capacity": 68,
+            "estimated_flight_duration": 135
+        }
+    ]
+}
