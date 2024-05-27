@@ -10,3 +10,7 @@ class Airline(str, Enum):
    DELTA = "Delta"
    SOUTHWEST = "Southwest"
    ALASKA = "Alaska"
+   
+class Update_Flight(BaseModel):
+    capacity: int
+    estimated_flight_duration: int

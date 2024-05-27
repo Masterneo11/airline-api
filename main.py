@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 import json
-from models import Flight, Airline
+from models import Flight, Airline, Update_Flight
 
 app = FastAPI()
 
@@ -42,29 +42,19 @@ async def create_airline(airline: Airline, flight: Flight):
 
 
 @app.put("/{airline}/{flight_num}")
-async def update_flights(airline: Airline, flight_num: str, new_flight: Flight):
-    flights = airlines[airline]
-    for index, flight in enumerate(flights):
-        if flight_num == flight.flight_num:
-            if new_flight.capacity is not None:
-                flights[index].capacity = new_flight.capacity
-            if new_flight.estimated_flight_duration is not None:
-                flights[index].estimated_flight_duration = new_flight.estimated_flight_duration
-            if new_flight.flight_num is not None:
-                flights[index].flight_num = new_flight.flight_num
-            return " flight updated"
-    
-            
-
+async def update_flights(airline: Airline, flight_num: str, update_flight: Update_Flight):
+    for flight in airlines[airline]:
+        if flight.flight_num == flight_num:
+            flight.capacity = update_flight.capacity
+            flight.estimated_flight_duration = (update_flight.estimated_flight_duration)
+    return "Flight updated successful+++"
 
 @app.delete("/{airline}/{fligh_num}")
 async def delete_flight_number_from_airline(airline: Airline, flight_num: str,):
-    flights = airlines[airline]
-    for index in flights:
+    for index in airlines[airline]:
         if flight_num == index.flight_num:
-           flights.remove(index)
-           return "flight has been deleted from flights"
-    return " That flight does not exist"
+           airlines[airline].remove(index)
+    return "flight has been deleted from flights"
 
 """
 Have these endpoints:
