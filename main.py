@@ -35,7 +35,7 @@ async def get_flight_number(airline_name: Airline, flight_num : str) -> Flight:
                 return index
         raise HTTPException(status_code=404, detail="Flight doesnt exist")
 
-@app.post("/airline")
+@app.post("/{airline}")
 async def create_airline(airline: Airline, flight: Flight):
     airlines[airline].append(flight)
     return "creating airline flight complete"
@@ -58,7 +58,7 @@ async def update_flight(airline: Airline, flight_num: str, update_flight: Update
     return "Flight updated successfully"
 
 
-@app.delete("/{airline}/{fligh_num}")
+@app.delete("/{airline}/{flight_num}")
 async def delete_flight_number_from_airline(airline: Airline, flight_num: str,):
     for index in airlines[airline]:
         if flight_num == index.flight_num:
