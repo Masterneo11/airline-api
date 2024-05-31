@@ -40,14 +40,23 @@ async def create_airline(airline: Airline, flight: Flight):
     airlines[airline].append(flight)
     return "creating airline flight complete"
 
-
+    
 @app.put("/{airline}/{flight_num}")
-async def update_flights(airline: Airline, flight_num: str, update_flight: Update_Flight):
+async def update_flight(airline: Airline, flight_num: str, update_flight: Update_Flight):
+    flight_found = False
     for flight in airlines[airline]:
         if flight.flight_num == flight_num:
+            flight_found = True
             flight.capacity = update_flight.capacity
-            flight.estimated_flight_duration = (update_flight.estimated_flight_duration)
-    return "Flight updated successful+++"
+            flight.estimated_flight_duration = update_flight.estimated_flight_duration
+            break
+    if not flight_found:
+        new_flight = Flight(flight_num=flight_num,
+                            capacity=update_flight.capacity,
+                            estimated_flight_duration=update_flight.estimated_flight_duration)
+        airlines[airline].append(new_flight)
+    return "Flight updated successfully"
+
 
 @app.delete("/{airline}/{fligh_num}")
 async def delete_flight_number_from_airline(airline: Airline, flight_num: str,):
